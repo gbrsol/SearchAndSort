@@ -1,0 +1,457 @@
+﻿Métodos de Busca(Searching)
+
+- Buscas em estruturas desordenadas
+- Busca com sentinela(vetor, lista dinâmica, arquivo)
+-----------------------------------------------------------
+Busca Exaustiva
+	Critérios de parada:
+		1 - quando encontra a chave procurada
+		2 - quando termina o vetor
+		
+public int busca_exaustiva(int chave)
+{
+	int pos;
+	while(pos < TL && chave != vet[pos])
+	pos++;
+	if(pos < tl)
+		return pos;
+	else return -1;
+}
+
+Busca Exaustiva com Sentinela
+	Critérios de parada:
+		1 - quando encontra a chave procurada
+		
+public int busca_exaustiva(int chave)
+{
+	int pos;
+	vet[tl] = chave;
+	while(chave != vet[pos])
+	pos++;
+	if(pos < TL)
+	return pos;
+	else return -1;
+}
+
+Buscas em Estruturas Ordenadas
+	- Busca sequencial(vetor, lista dinâmica, arquivo)
+	- Binária(vetor, arquivo)
+------------------------------------------------------------
+Busca sequencial
+	Critérios de parada: 
+		1 - quando a chave procurada é encontrada
+		2 - quando termina o vetor
+		3 - quando encontra um valor maior que a chave 
+
+public int busca_sequencial(int chave)
+{
+	int pos = 0;
+	while(pos < tl && vet[pos] < chave)
+		pos++;
+	if(pos < tl && chave = vet[pos])
+		return pos
+	else return pos+tl;
+	//fora da função
+	posicao = busca_sequencial(5);
+	if(posicao < tl)
+	//achei
+	else
+	{
+	//não achei
+	posicao = tl;
+	}
+} //complexidade: se tiver 1000 elementos: 2002c + 2 and, ou seja, O(n)
+
+Busca Binária
+	Tempo de busca: log2N = 2^? >= N, complexidade O(log(n))
+							2^? >= 1000
+							2^10 = 1024 >= 1000
+
+public int busca_binaria(int chave)
+{
+	int inicio,fim,meio;
+	inicio = 0;
+	fim = tl-1;
+	meio = fim/2;
+	while(inicio < fim && vet[meio] != chave)
+	{
+		if(vet[meio] < chave)
+			inicio = meio+1;
+		else
+			fim = meio-1;
+		meio = (fim+inicio)/2;
+	}
+	if(vet[meio] == chave)
+		return meio;
+	else (chave > vet[meio])
+		return meio+tl+1;
+	return tl+meio;
+}
+
+-----------------------------------------------------------------------------------
+
+Métodos de Ordenação(Sorting)
+
+	Entende-se a atividade de ordenação como sendo o processo de rearranjo de um certo conjunto de objetos de acordo com um critério(ordem) específico. O objetivo da ordenação é facilitar a 
+de dados. Exemplos: lista telefônica, índices, dicionários, etc.
+	Os métodos utilizados são, em geral, classificados em 2 categorias:
+		Classificação interna(vetores/listas dinâmicas):
+			Estruturas de dados armazenadas na memória "interna" dos computadores
+		Classificação externa(arquivos):
+			Estrutura de dados armazenada em memória "externa"
+Algoritmos estudados
+	Por inserção: Inserção direta, inserção binária(usa busca binária) e Shell
+	Por seleção: seleção direta e heap
+	Por troca: bolha, shake e quick
+	Por intercalação: mergeSort ou Fusão direta
+
+Medidas para análise de eficiência
+	A medida padrão de eficiência e o esforço do algoritmo, ou seja, o número medido de comparações entre os elementos do conjunto
+	Outro critério utilizado é o número de trocas efetuadas
+
+Ordenação por Inserção direta
+	Wirth pags 53-55
+	Azeredo pags 16-20
+
+Análise de Eficiência
+
+	Comparações	Movimentações
+Mínimo	n-1		3*(n-1)
+Médio	(n^2+n-2)/4	(n^2+9n-10)/4
+Máximo	(n^2+n-4)/4	(n^2+3n-4)/2
+
+-Número mínimo ocorre se os elementos estiverem, inicialmente ordenados.
+-Número máximo ocorre se os elementos estiverem, incialmente em ordem reversa
+-Processo estável de ordenação, mantém inalterada a ordem dos eleemntos que possuem chaves iguais
+--------------------------------------------------------------------------------------------------------------
+ListaGen
+---------------------------------------------------------------------------------------------------------------
+Método da seleção direta
+	Wirth pags 56-58
+	Azeredo pags 45-50
+
+Este método é baseado no seguinte princípio:
+	- Descobre-se o menor elemento e troca-o com o elemento da posição 0
+	- Descobre-se 2° menor elemento e troca-o com o elemento da posição 1
+	- Prossegue até o final da estrutura
+
+Análise de Eficiência
+
+O número C de comparações das chaves é independente da ordem inicial das mesmas
+	
+	C = (n^2 - n)/2
+
+O número M de movimentações é de, no mínimo, Mmin = 3*(n-1) no caso de as chaves estarem inicialmente ordenadas
+		
+O número M de movimentações média, é Mmed = n*(Ln(n)+G) onde G = 0,577216...
+O número M de movimentações máximo, Mmáx = (n^2)/4 + 3*(n-1) no caso de as chaves estarem na ordem reversa
+(faltou coisa)
+----------------------------------------------------------------------------------------------------------------
+Método da Bolha - Bubble Sort
+
+Wirth pags 58-61
+Azeredo pags 27-31
+
+O método de ordenação por permutação direta(bolha) é baseado na comparação e permutação de pare de elementos adjacentes até que todos eles estejam ordenados
+
+Método ShakeSort
+
+Uma "melhoria" para este método seria alternar os sucessivos passos de ordenação. O algoritmo resultante dessa prática se chaam ShakeSort("ordenação por agitação")
+
+Análise de eficiência
+
+O número de comparações no algoritmo de permutação direta é:
+	C = (n^2 - n)/2
+e os números mínimo, médio e máximo de movimentações(atribuições de valores aos elementos) são, respectivamente:
+	Mmin = 0, Mmed = 3*(n^2 - n)/2 , Mmax = 3(n^2 - n)/4
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Método de ordenação heap
+
+Wirth pags 63-68
+Azeredo pags 50-69
+
+-Construir a árvore heap(filhos são menores que pai)
+-Trocar o(1°,2°......,tl-1) maior elemento que estará na posição 0 com o (tl-1,tl-2.....,1) elemento, respectivamente
+
+pai->posição n->filhos(2n+1 e 2n+2)
+
+O método heap é dividido em duas partes: primeiro monta-se uma árvore binária chamada heap, para em seguida, classificar através da seleção(na árvore)
+
+É considerado um vetor c0,c1...,cn-1 como sendo representação de uma árvore binária, usando a seguinte interpretação dos índices das chaves.
+c0 é a raíz da árvore
+
+c2i+1 = subárvore da esquerda de ci> para i=0
+c2i+1 = subárvore da direita de ci > n div 2
+
+		c0
+c1				c2
+c3-c4				c5-c6
+
+representação da arvore no vetor C0....6
+
+O algoritmo consiste em trocar as chaves dentro do vetor, de tal forma qe estas passem a formar uma hierarquia, na qual todas as raízes das subárvores sejam maiores ou iguais a qualquer uma 
+de suas sucessoras(ci>=c2+1 e ci>=c2i+2). Quando todas as raízes das subárvores satisfazerem essas condições, a árvore forma um heap.
+O teste se inicia pela última subárvore cuja raíz está na posição n div 2-1 do vetor de chaves, prosseguindo-se, a partir daí, para as subárvores que antecedem esta, até testar a raíz da árvore.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+08/03
+
+Método de Ordenação por incrementos Decrescentes - Shell
+
+Wirth pags 61-63
+Azeredo pags 22-26
+
+O método Shell foi proposto por Shell, D.L. como sendo um refinamento do método de ordenação por inserção direta.
+Primeiramente, todos os elementos que estiverem a intervalos de quatro posições entre si na sequência corrente são agrupados e ordenados separadamente. Este processo é denominado de distancia 4.
+Após este primeiro passo, os elementos são reagrupados em grupos com elementos cujo intervalo é de duas posições, sendo então ordenados novamente. Este processo é denominado de ordenação de distância
+2. Finalmente, em um terceiro passo, todos os elementos são ordenados através de uma ordenação simples, ou ordenação de distância.
+O método possui a vantagem que a cada passo, faz classificações parciais da estrutura, o que favorece o desempenho dos passos seguintes.
+
+void shell()
+{
+	int i,j,k,dist,aux;
+	for(dist = 4; dist > 0 ; dist/=2)
+	{
+		for(i = 0; i < dist; i ++)
+		{
+			for(j = i; j+dist > vet.length-1;j+=dist)
+			{
+				if(vet[j] > vet[j+dist])
+				{
+					aux = vet[j];
+					vet[j] = vet[j+dist];
+					vet[j+dist] = aux;
+					for(k = j; k >=0 && vet[k] < vet[k-dist]; k-=dist)
+					{
+							aux = vet[k];			
+							vet[k] = vet[k+dist];
+							vet[k+dist] = aux;
+					}
+				}
+			}
+		}
+	}
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+11/03
+
+Método de ordenação quicksort
+
+Wirth pags 68-73
+Azeredo pags 34-44
+
+Criado por C.A.R. Hoare, o algoritmo quicksort("ordenação rápida") é baseado no fato de que as permutações devem ser preferencialmente empregadas p/ pares de elementos que guardem entre si
+distâncias grandes, com a finalidade de conseguir uma eficiência maior. É possível ordená-los com apenas n/2 permutações tornando-se primeiramente os elementos das extremidades à direita e
+à esquerda convergindo gradualmente p/ o centro, pelos dois lados.
+Quick com pivô: o vetor é varrido da esquerda p/ a direita até que seja encontrado um elemento menor que o pivô.
+Nesta ocasião os elementos são permutados, e este processo de varredura e permutação continua até qe os 2 deslocamentos se encontrem, quando deve ser repetido o processo p/ as partes restantes.
+Quick sem pivô: p/ i = 0 e j = tl-1, começa-se aumentando o i, quando o elemento da posição i for maior que o elemento da posição j, per4mutam-se os elementos, passam-se a diminuir o j até que o 
+elemento de j seja menor que o de i, assim sucessivamente até que i e j se encontrem.
+Separamos as partes e continuamos até que todas as partes tenham um só elemento.
+
+public void sempivo(int ini, int fim)
+{
+	int i = ini,j=fim;
+	while(i <  j)
+	{
+		while(vet[i] <= vet[j] && i < j)
+		{
+			i++;
+		}
+		aux = vet[i];
+		vet[i] = vet[j];
+		vet[j] = aux;
+
+		while(vet[j] >= vet[i] && i < j)
+		{
+			j--;
+		}
+		aux = vet[i];
+		vet[i] = vet[j];
+		vet[j] = aux;
+	}
+	if(ini < i-1)
+		sempivo(ini,i-1);
+	if(j+1 < fim)
+		sempivo(j+1,fim);
+}
+
+public void compivo(int ini, int fim)
+{
+	int pivo = vet[(ini+fim)/2], i = ini,j=fim;
+	while(i < j)
+	{
+	
+		while(vet[i] < pivo)
+		{
+			i++;
+		}
+		while(vet[j] > pivo)
+		{
+			j--;
+		}
+		if(i <=j)
+		{
+			aux = vet[i];
+			vet[i] = vet[j];
+			vet[j]= aux;
+			i++;j--;
+		}
+		
+	}
+	if(ini < j)
+		compivo(ini,j);
+	if(i < fim)
+		compivo(i,fim);
+	
+}
+
+----------------------------------------------------------------------------------------------------
+
+Método de ordenação - intercalação simples mergesort ou fusão direta
+
+Wirth pags 76-82
+Azeredo pags 86-96
+
+A classificação por intercalação consiste em dividir o vetor em 2 ou mais segmentos, formando novos segme3ntos ordenados, os quais serão intercalados entre si.
+
+Primeira implementação: 
+
+public void particao(int vet1[],int vet2[])
+{
+	int i = 0, meio = tl/2;
+	for(;i<meio;i++)
+	{
+		vet1[i] = vet[i];
+		vet2[i] = vet[meio+i];	
+	}
+}
+
+public void fusao(int vet1[], int vet2[], int seq)
+{
+	int i,j,k ,res[], auxseq = seq;
+	res = new int[tl];
+	i = j = k = 0;
+	while( k <tl)
+	{
+		while(i < seq && j < seq)
+		{
+			if(vet2[j] < vet1[i])
+			{
+				res[k++] = vet2[j++]; 
+			}
+			else
+			{
+				res[k++] = vet1[i++];
+			}	
+		}
+		while(i < seq)
+			vet[k++] = vet1[i++];
+		while(j < seq)
+			vet[k++] = vet2[j++];
+		seq = seq+auxseq;
+	}
+
+}
+
+public void merge()
+{
+	int seq = 1;
+	int vet1[] = new int[tl/2];
+	int vet2[] = new int[tl/2];
+	
+	while(seq <= tl/2) // ou seq < tl
+	{
+		particao(vet1,vet2);
+		fusao(vet1,vet2,seq);
+		seq *=2;
+	}
+}
+
+Segunda implementação:
+
+public void mergesortrec()
+{
+	int aux[] = new int[tl];
+	merge(aux,0,tl-1);
+}
+
+public void fusao(int aux[], int ini1,int fim1, int ini2, int fim2)
+{
+	int i = ini1, j = ini2, k = 0;
+	while(i <= fim1 && j <= fim2)
+	{
+		if(vet[i] < vet[j])
+			aux[k++] = vet[i++];
+		else
+			aux[k++] = vet[j++];
+	}	
+	while(i <= fim1)
+		aux[k++] = vet[i++];
+	while(j <= fim2)
+		aux[k++] = vet[j++];
+	for(i = 0; i < k; i++)
+		vet[ini1 +i] = aux[i];
+}
+
+public void merge(int aux[],int esq, int dir)
+{
+	if(esq < dir)
+	{	
+		meio = (esq+dir)/2;
+		merge(aux,esq,meio);
+		merge(aux,meio+1,dir);
+		fusao(aux,esq,meio,meio+1,dir);
+	}
+}
+
+14/04
+
+Árvore B
+
+29/04
+
+Árvore B+
+
+N = quantidade de informações 
+N-1 = informações
+
+Nodo folha:
+-O primeiro nodo contém ~= (n-1)/2 informações
+-O segundo nodo contém os valores restantes
+-Copia a menor informação do nodo para o nodo pai
+-Liga as folhas entre si
+Obs: menor valor fica duplicado no nó folha  
+
+Nodo não folha:
+-O primeiro nodo contém ~= n/2-1 informações
+-Move o menor dos valores restantes para o pai
+-O segundo nodo contém os valores restantes
+	
+Nodo folha:
+aprox n-1/2 
+
+Nodo não folha:
+aprox n/2-1
+
+public void insercao(int info)
+{	
+	for(int i = 0; i < n;i++)
+	{
+		if(raiz == null)
+			raiz = new no(info);
+		else if(raiz.getvLig(0) == null) // folha
+		{
+			if(raiz.getTl > arred((n-1)/2))
+				split(raiz);
+		}
+		else //não folha
+		{
+		}
+	}
+}

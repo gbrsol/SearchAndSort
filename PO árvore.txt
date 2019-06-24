@@ -1,0 +1,36 @@
+﻿Árvore N-área
+
+- N é o número de ligações
+- Possui N-1 informações
+
+Exemplos:
+
+-Árvore binária(2-área)
+	esq info dir
+
+-Árvore ternária
+	lig1 info1 lig2 info2 lig3 tl
+
+-Árvore 4-área 
+	lig1 info1 lig2 info2 lig3 info3 lig4 tl
+
+-Árvore N-área
+	vInfo 0|1    TL 
+	vLig 0|1|2 
+
+Árvore B(B Tree)
+
+-Sempre balanceada
+-Todo nó possui no máximo 2N registros onde: N=ordem
+-Todo nó, com exceção da raiz, possui no mínimo N registros e no máximo 2N registros
+-Todas as folhas estão no mesmo nível
+
+Exemplo: árvore B de ordem 2(N=2)->min 2(n)
+				 ->max 4(2N)
+
+Exemplos de árvores:
+	(desenho no arquivo la)
+
+Ordem 2: min 2*N max 4*2N
+
+20-10-30-40-15-35-50-25-09-05-13-21-22-23-26-27-31

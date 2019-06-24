@@ -1,0 +1,24 @@
+Primeiro Bimestre:
+
+Inserção Direta
+Seleção Direta
+Bubble Sort
+Inserção Binária
+Shake Sort
+Shell Sort
+Quick Sort Com e Sem Pivô
+Merge Sort Implementações 1 e 2(o que chama a fusão)
+Tim Sort
+Heap Sort
+Count Sort
+Radix Sort
+Bucket Sort
+Comb Sort
+Gnome Sort
+
+Segundo Bimestre:
+
+Árvore N-Área
+Árvore B
+Árvore B+
+Organização de arquivos: sequencial, indexado e sequencial-indexado
